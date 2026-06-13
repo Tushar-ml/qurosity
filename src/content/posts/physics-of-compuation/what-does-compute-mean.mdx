@@ -16,91 +16,127 @@ seriesPart: 2
 
 ## The Question Turing Didn't Answer
 
-In 1936, Alan Turing proved that one abstract machine can compute anything computable. What he did **not** prove — what he never tried to prove — is that the real universe works this way.
+In 1985, a physicist named David Deutsch wanted to know whether the laws of nature could, in principle, be reproduced by a machine. Not approximated. Not modelled. **Reproduced** — same measurement statistics, same interference patterns, same quantum behaviour.
 
-His result is about **math**, not physics. It says nothing about whether atoms, fields, or spacetime follow the same rules as a paper machine. That gap sat open for nearly fifty years.
+His answer required him to invent a new kind of computer. And it left a question physics still hasn't fully settled: **is the universe computing, or just changing?**
 
-In 1985, David Deutsch closed it. Along the way, he helped invent quantum computing.
+That question sits on top of a gap Turing opened fifty years earlier. In 1936, Alan Turing proved that one abstract machine — read a symbol, write a symbol, move left or right, change state — can compute anything that is computable. What he did **not** prove is that atoms, fields, and spacetime actually obey those rules. His thesis is about **math**, not physics.
 
-[Part 1](/posts/physics-of-compuation/landauer-principle-thermodynamic/) showed that computation is physical — every erased bit costs real heat. <mark>Part 2 argues the reverse: physics itself is computational.</mark> Not "wrong" — just the other direction. Part 1: computers obey physics. Part 2: physics evolves like a program updating state step by step. Deutsch's bet is that those two descriptions are the same thing from different angles.
+Deutsch closed the gap. Along the way, he helped invent quantum computing.
+
+[Part 1](/posts/physics-of-compuation/landauer-principle-thermodynamic/) showed that computation is physical — every erased bit costs real heat, measured in joules. <mark>Part 2 argues the reverse: physics itself is computational.</mark> Not the opposite claim — the other direction of the same bridge. Part 1: when computers run, they obey physics. Part 2: when physics runs, it evolves state step by step under fixed rules — the same logical structure as a program. Deutsch's bet is that those two descriptions are one thing seen from two angles.
+
+These are not the same claim. Together they are stronger: an **equivalence**. Information and physics may be two descriptions of the same underlying constraint. The universe doesn't just permit computation. In a precise, testable sense, it may *be* computation — on hardware that predates every engineer.
 
 ## Church–Turing: Math, Not Physics
 
 In 1936, Turing and Alonzo Church asked: **what can a machine calculate?**
 
-Turing's answer was the [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) — deliberately stripped down. An endless tape of cells, each holding 0, 1, or blank. A head reads one cell. The machine has an internal **state** — where it is in the recipe. Each step: look at the symbol, follow a fixed rule, write a new symbol, move left or right, change state. Repeat until done.
+Turing's answer was the [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) — deliberately stripped to the minimum. An endless tape of cells, each holding one symbol (0, 1, or blank). A head sits on one cell. The machine has an internal **state** — a label for where it is in the recipe. At each step it reads the symbol under the head and its current state, then follows a fixed rule: write a new symbol, move left or right, switch to a new state. Repeat until the machine halts.
 
-No screen. No RAM. No GPU. Just a lookup table and a moving head. If any step-by-step method can solve a problem, this bare-bones machine should be able to too.
+That is the whole machine. No screen. No RAM. No GPU. Just a lookup table and a moving head. Turing chose this because if a problem can be solved by *any* step-by-step mechanical method, it should be solvable by *this* one — the simplest possible model of mechanical reasoning.
 
-Church used the [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus) instead — same boundary, different picture. Their conclusion, the [Church–Turing thesis](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis):
+Church used the [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus) — a formal system for function application. Gödel and Post soon showed these models compute the same class of functions. Different formalisms, one boundary. The [Church–Turing thesis](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis):
 
 > If you can solve a problem with a clear step-by-step recipe, a Turing machine can solve it too.
 
-Three catches. It is a **belief about math**, not a proven theorem. It lives **on paper** — no heat, no erasure cost ([Part 1](/posts/physics-of-compuation/landauer-principle-thermodynamic/) showed real hardware is different). And it only asks **"is it possible?"** — not how long it takes.
+Three catches — worth stating plainly:
 
-Some problems sit outside even that — the [halting problem](https://en.wikipedia.org/wiki/Halting_problem), for example. But all of this is math on a page. Deutsch later asked: **does anything in nature actually run like this?** Turing never did.
+**It is a belief about math, not a proven theorem.** "Recipe" is an everyday idea. A Turing machine is a precise math object. The thesis connects them; it does not prove they are identical.
+
+**It lives on paper, not in a lab.** A Turing machine never gets hot. It erases its tape for free. Real computers — and the real universe — do not work that way. That is what [Part 1](/posts/physics-of-compuation/landauer-principle-thermodynamic/) established.
+
+**It only asks "is it possible?" — not "how long will it take?"** Sorting three names and sorting three billion names are the same kind of problem here. One takes a blink. One takes years.
+
+Some problems sit outside even that boundary — the [halting problem](https://en.wikipedia.org/wiki/Halting_problem), for example. No Turing machine can decide, for every program, whether it will stop. But all of this is still math on a page.
+
+Deutsch later asked the harder question: **does anything in nature actually run like a Turing machine?** Not as metaphor. As matter, following rules. Turing never asked. For decades, almost nobody did.
 
 <mark>Turing defined compute on paper. He never asked what real hardware runs the steps — or what it costs to reset the result.</mark>
 
 ## Deutsch's Physical Version
 
-Before Deutsch, people assumed any computer we build could be simulated by a Turing machine. Fine for ordinary chips. Not for quantum systems.
+Before Deutsch, a weaker version circulated: any computer we can build can be simulated by a Turing machine. Fine for classical digital chips. It breaks down for quantum systems, field theories, and anything where the physical process itself exceeds classical simulation.
 
-In 1985, Deutsch claimed in [*Quantum Theory, the Church–Turing Principle and the Universal Quantum Computer*](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis#Physical_Church%E2%80%93Turing_principles):
+In 1985, Deutsch published [*Quantum Theory, the Church–Turing Principle and the Universal Quantum Computer*](https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis#Physical_Church%E2%80%93Turing_principles). His claim:
 
 > Every finitely realizable physical system can be perfectly simulated by a universal quantum computer operating on a finite number of qubits.
 
-In plain English: **any physical process in a finite region can, in principle, be copied by a quantum computer.** Not because quantum computers are fast calculators — because they are **universal simulators of physics**.
+Unpack that phrase by phrase:
+
+- **Finitely realizable** — the system fits in a bounded region of space and time. Not an infinite universe all at once.
+- **Perfectly simulated** — your model reproduces the same measurement statistics as the real system, to arbitrary accuracy. Not a cartoon.
+- **Universal quantum computer** — not a faster calculator. A machine that can mimic any other physical process within that bound.
+- **Finite number of qubits** — the simulation is itself a physical system with finite resources.
+
+In plain English: **any physical process that can happen in a finite region can, in principle, be copied by a quantum computer.** Deutsch was not trying to build a better factoring machine. He was asking whether **physical law itself is computationally universal** — but only if you allow the full machinery of quantum mechanics.
 
 <ChurchTuringThesisFigure />
 
-Ordinary bits are 0 or 1. A qubit can be both at once:
+Why quantum? Because classical bits are always 0 or 1. Physics is not always so definite. A qubit can hold a superposition that no classical register can store exactly:
 
 <InteractiveEquation
   expression={"|\\psi\\rangle = \\alpha|0\\rangle + \\beta|1\\rangle"}
-  caption="A qubit in superposition — both 0 and 1 at once"
+  caption="A qubit in superposition — a state space classical simulation must approximate, not store exactly"
   variables={[
-    { symbol: "|ψ⟩", meaning: "The quantum state" },
-    { symbol: "α, β", meaning: "How much weight on each state" },
-    { symbol: "|0⟩, |1⟩", meaning: "The two basic states" },
+    { symbol: "|ψ⟩", meaning: "The quantum state of the system" },
+    { symbol: "α, β", meaning: "Complex amplitudes — weights on each state (|α|² + |β|² = 1)" },
+    { symbol: "|0⟩, |1⟩", meaning: "Computational basis states" },
   ]}
 />
 
-Deutsch was not after a faster factoring machine. He asked whether **physical law itself can be simulated** — but only with the full rules of quantum mechanics. Real simulation runs on real hardware. Bits get erased. Part 1's heat bill applies.
+What changes with Deutsch's principle:
+
+- **Compute** is no longer "what mathematicians can write down." It is what physical law allows to evolve and be simulated.
+- **Thermodynamics re-enters.** Simulation runs on real hardware. State updates can erase information. Part 1's heat bill applies to real compute steps — not abstract symbols.
 
 <PhysicalSimulationFigure />
 
-## What "Simulate" Means
+## What "Simulate" Actually Means
 
-*Simulate* does not mean "rough guess." It means **your model must match the real system's experimental results** — same patterns, same probabilities.
+Deutsch's principle hinges on a precise word: *simulate*.
 
-The [double-slit experiment](https://en.wikipedia.org/wiki/Double-slit_experiment) is the classic case. Fire electrons one at a time through two slits. Each hits one spot. But over many trials, a wave-like interference pattern appears — as if each electron went through both slits.
+It does not mean "rough guess on a spreadsheet." It means **reproduce the measurement statistics** of the original system to arbitrary accuracy. If you simulate a hydrogen atom, your model must predict the same spectral lines, the same transition probabilities, the same interference patterns — not a sketch of them.
 
-A classical computer can store "left" or "right." Not "both at once." Richard Feynman pointed this out in 1982: simulating quantum physics on a classical machine gets expensive fast.
+The [double-slit experiment](https://en.wikipedia.org/wiki/Double-slit_experiment) makes this concrete. Fire electrons one at a time through two slits onto a detector screen. Each electron arrives at a single point — as if it went through one slit or the other. But over thousands of trials, an interference pattern emerges — bright and dark bands — as if each electron went through **both** slits at once.
 
-<mark>Simulation is not a metaphor. Physical change and computation share the same boundary.</mark>
+A classical computer can store "left slit" or "right slit." It cannot efficiently store "both at once." To simulate the quantum system faithfully, you need a quantum system.
+
+Richard Feynman saw this clearly in 1982, in [*Simulating Physics with Computers*](https://en.wikipedia.org/wiki/Quantum_complexity_theory#History). Simulating quantum mechanics on a classical machine pays an exponential price in memory and time. At its most fundamental level, the universe is not something a classical Turing machine can cheaply copy.
+
+<mark>Simulation is not a metaphor. It is the claim that physical evolution and computation share the same boundary.</mark>
+
+So in a physical world, to "compute" is not just to get an answer. It is to **evolve a system according to the same laws as the thing you are modeling**.
 
 ## Where Part 1 and Part 2 Click Together
 
-Part 1: erasing a bit costs at least <InlineMath expression={"k_B T \\ln 2"} /> of heat. Part 2: physical systems can be simulated by quantum computers. Now add how quantum states evolve:
+This is the heart of the post.
+
+Part 1: erasing a bit costs at least <InlineMath expression={"k_B T \\ln 2"} /> of heat.
+
+Part 2: physical systems can be simulated by quantum computers.
+
+Now add quantum mechanics' core rule for how states change over time:
 
 <InteractiveEquation
   expression={"|\\psi(t)\\rangle = U(t)|\\psi(0)\\rangle"}
-  caption="Quantum state evolution — the full state is kept, so the process can run backward"
+  caption="Unitary evolution — reversible, information-preserving, zero Landauer cost if nothing is discarded"
   variables={[
-    { symbol: "|ψ(t)⟩", meaning: "Complete state at time t — nothing discarded" },
-    { symbol: "U(t)", meaning: "The law that evolves the state forward" },
-    { symbol: "|ψ(0)⟩", meaning: "Starting state — recoverable if you keep |ψ(t)⟩" },
+    { symbol: "|ψ(t)⟩", meaning: "The complete quantum state at time t — nothing thrown away" },
+    { symbol: "U(t)", meaning: "Unitary evolution operator (U†U = I) — reversible by construction" },
+    { symbol: "|ψ(0)⟩", meaning: "The starting state — recoverable if you keep |ψ(t)⟩" },
   ]}
 />
 
-This evolution is **reversible**. The full state <InlineMath expression={"|\\psi(t)\\rangle"} /> holds everything — run the clock backward and you recover <InlineMath expression={"|\\psi(0)\\rangle"} />. No bit erased. No Landauer heat.
+This evolution is **reversible**. The full state <InlineMath expression={"|\\psi(t)\\rangle"} /> holds *all* the information. Run the clock backward and you recover <InlineMath expression={"|\\psi(0)\\rangle"} />. No hidden waste bin. No bit erased.
 
-**Reversible means you keep the information somewhere.** In quantum mechanics, the state is the storage. In a reversible classical computer (Bennett, Part 3), you need extra memory for every bit you would otherwise overwrite.
+**Reversible means you keep the information somewhere.** In quantum mechanics, the state itself is the storage. In a reversible classical computer (Bennett's idea, Part 3), you need extra memory for every bit you would otherwise overwrite — because erasing is what costs heat.
 
-<mark>Landauer's tax hits only when something is forgotten.</mark>
+<mark>By Landauer's principle, reversible evolution has zero thermodynamic cost — but only if nothing is forgotten.</mark>
 
-So where does the heat come from? **Measurement.** Check which slit the electron took and a spread of possibilities collapses to one. Information is thrown away. The environment absorbs it as heat — Part 1's mechanism.
+So where does the heat come from?
+
+From **measurement**. When you observe which slit the electron went through, a spread of possibilities collapses to one outcome. Two options become one. Information is discarded. The environment absorbs that loss as heat — exactly the mechanism from Part 1.
 
 | Process | Reversible? | Heat cost |
 |---------|-------------|-----------|
@@ -108,36 +144,68 @@ So where does the heat come from? **Measurement.** Check which slit the electron
 | Measurement / decoherence | No | At least <InlineMath expression={"k_B T \\ln 2"} /> per erased bit |
 | GPU register overwrite | No | Much more than that today |
 
-Nature evolves reversibly at the bottom — for free. We don't, because our machines **read out and discard** constantly. A GPU forward pass overwrites registers at every step. Training discards terabytes of intermediate state. **The heat tax is not from computing. It is from forgetting.**
+The universe, at its most fundamental level, evolves reversibly — for free. We don't, because our computers, our neural networks, our measurement apparatus all **read out and discard** intermediate results constantly.
 
-<mark>We look at the answer and throw the rest away. That is where the bill comes from.</mark>
+Charles Bennett showed in 1973 that classical computation can also be made reversible in principle. Part 3 goes deeper. The insight is already here: **the heat tax is not from computing itself. It is from forgetting intermediate results.**
+
+A forward pass through a neural network is a chain of physical state updates. Registers cleared. Activations overwritten. Each step is a miniature measurement — possibilities collapsed to one value, the rest discarded as heat. Training is worse: weeks of compute, terabytes of intermediate state thrown away between steps. Part 1's <InlineMath expression={"N_{\\text{bits}}"} /> count only makes sense once you see this: **our machines pay at every readout. The universe's basic evolution does not.**
+
+That is why the two posts snap together. Landauer without Deutsch is a tax code with no taxpayer. Deutsch without Landauer is a universal computer with no electricity bill. Together they describe a universe that computes freely at the level of fundamental law, and charges heat only when something — a detector, a GPU, a demon — decides to forget.
+
+<mark>Part 1 showed the universe charges heat when information is erased. Part 2 shows why — and why we pay more than nature does at the deepest level.</mark>
 
 ## Three Reasons People Push Back
 
-Deutsch's idea is strong. Not everyone buys it.
+Deutsch's principle is strong. It is not uncontroversial. Three objections deserve honest treatment — each opens a door the series will walk through later.
 
-**Continuous vs discrete.** Real numbers like π never end. Turing machines handle discrete symbols. Can a digital machine model a smooth universe? The reply: we never measure infinite precision anyway. But if nature is truly continuous at the bottom, maybe "digital" is wrong. Part 4 picks this up.
+### Continuous vs Discrete
 
-**Penrose's objection.** Roger Penrose argues human mathematicians see truths no program could prove — via [Gödel's incompleteness theorems](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems). Serious challenge, not fringe. Part 7 will address it. **If Penrose is right, the whole story starts on shaky ground.**
+Physics is written in continuous mathematics — π never ends, smooth curves, differential equations. Turing machines operate on discrete symbols. Can a digital machine truly model a continuous universe?
 
-**The Planck scale.** Maybe space has a smallest unit at the [Planck scale](https://en.wikipedia.org/wiki/Planck_units) (~10⁻³⁵ meters). If so, the universe may be digital at the bottom. If not — or if physics allows [computation beyond Turing machines](https://en.wikipedia.org/wiki/Hypercomputation) — Deutsch's principle may be too weak. Experiments may settle this.
+The standard reply: real measurements always have finite precision. Deutsch's claim applies to what can actually be built and tested — not to perfect real numbers on paper.
+
+But the worry lingers. If nature is truly continuous at the deepest level, maybe "digital" is the wrong frame. Part 4 takes this up.
+
+### Penrose's Objection
+
+Roger Penrose, in *The Emperor's New Mind* and later works, argues that human mathematical insight exceeds what any Turing machine can produce. His case runs through [Gödel's incompleteness theorems](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems): in any consistent formal system, some true statements cannot be proved from inside the system. Penrose claims human mathematicians can see the truth of such statements — and therefore human cognition is not computable.
+
+This is not a crackpot position. It is a direct challenge to the Church–Turing thesis itself — not Deutsch's physical extension, but the original mathematical claim.
+
+I won't resolve it here. Part 7 will steel-man the skeptics properly; the question of whether consciousness exceeds computation deserves its own careful treatment. For now: **if Penrose is right, the physical Church–Turing thesis is the least of our worries — because the mathematical one would already be false.**
+
+### The Planck Scale
+
+If spacetime is discrete at the [Planck scale](https://en.wikipedia.org/wiki/Planck_units) — roughly 10⁻³⁵ meters — the universe may be digital at the bottom, and Deutsch's quantum computer is the right universal model.
+
+If spacetime is continuous, or if physics permits [hypercomputation](https://en.wikipedia.org/wiki/Hypercomputation) beyond Turing machines, Deutsch's principle may be too *weak*, not too strong.
+
+We do not know yet. But the question is empirical — testable in principle, not merely philosophical.
 
 ## What We Learned
 
-- Physical processes can, in principle, be simulated by a quantum computer
-- Nature's basic evolution is reversible — no heat, if nothing is forgotten
-- Heat shows up when we **look at the answer and throw the rest away**
-- AI scaling limits are physical, not just engineering
+Part 1: information is physical — measured in joules and heat.
 
-Not: the universe is a video game. Not: every GPU op costs exactly <InlineMath expression={"k_B T \\ln 2"} />. Not: quantum computers solve everything. Not: Penrose is settled.
+Part 2: physics is computational — states evolve by fixed rules, simulable in principle by a universal quantum computer.
 
-Turing's thesis still holds in math. Deutsch changes the frame for physics. The AI question is not *"Will we run out of math?"* but *"Can silicon keep erasing bits without drowning in heat?"*
+Put together, these are not metaphors stacked on metaphors. They are two descriptions of the same constraint. Shannon entropy and Boltzmann entropy share the same functional form for a reason. When your training run overwrites a billion parameters, it is not just updating weights — it is paying entropy. When an electron evolves unitarily, it is computing reversibly — for free.
+
+| Does mean | Doesn't mean |
+|-----------|--------------|
+| Physical law can be simulated by a quantum computer | The universe is a video game |
+| Fundamental evolution is reversible and heat-free | Every GPU op costs exactly <InlineMath expression={"k_B T \\ln 2"} /> |
+| Heat shows up when we read out and forget | Quantum computers solve every problem instantly |
+| AI scaling limits are physical-process limits | Penrose is wrong (we haven't settled that) |
+
+The mathematical Church–Turing thesis still holds in its domain. Some functions are uncomputable. The halting problem has no general solution. Deutsch does not change that.
+
+What he changes is the frame. When we ask whether AI scaling hits a wall, we are not asking whether math runs out of theorems. We are asking whether **silicon, at room temperature, can keep erasing bits forever without drowning in heat**.
 
 The universe computes reversibly and for free. We don't.
 
 > **Can we close that gap — or is forgetting the price of knowing the answer?**
 
-Part 3: Bennett's reversible gates, invertible neural networks, and why nobody has shipped a reversible GPU.
+Part 3 takes up Bennett's escape hatch: reversible gates, invertible neural networks, and why nobody has shipped a reversible GPU yet.
 
 ## Where This Series Goes
 
@@ -148,4 +216,4 @@ Part 3: Bennett's reversible gates, invertible neural networks, and why nobody h
 - **Part 6: Quantum Mechanics as Computation.** Measurement, decoherence, and Landauer's tax.
 - **Part 7: Steel-Manning the Skeptics.** Wolfram, Penrose, and the joule-level rebuttal.
 
-<mark>We now know what compute means — and where the heat comes from. Next: whether we can compute without paying the erasure tax.</mark>
+<mark>We now know what compute means — and where the heat actually comes from. Next: whether we can compute without paying the erasure tax.</mark>

@@ -44,3 +44,58 @@ export function getSeriesPosts(
     })
     .sort((a, b) => (a.data.seriesPart ?? 0) - (b.data.seriesPart ?? 0));
 }
+
+export type AdjacentPostRef = {
+  id: string;
+  title: string;
+  filePath: string | undefined;
+};
+
+function toAdjacentRef(
+  post: CollectionEntry<"posts">
+): AdjacentPostRef {
+  return {
+    id: post.id,
+    title: post.data.title,
+    filePath: post.filePath,
+  };
+}
+
+/**
+ * Previous/next post for navigation.
+ * Series posts: ordered by seriesPart (prev = earlier part, next = later part).
+ * Other posts: ordered by publish date descending (blog archive order).
+ */
+export function getAdjacentPosts(
+  post: CollectionEntry<"posts">,
+  sortedPosts: CollectionEntry<"posts">[],
+  allPosts: CollectionEntry<"posts">[]
+): { prevPost: AdjacentPostRef | null; nextPost: AdjacentPostRef | null } {
+  const { series, seriesPart } = post.data;
+
+  if (series && seriesPart) {
+    const seriesPosts = getSeriesPosts(allPosts, slugifyStr(series));
+    const index = seriesPosts.findIndex(p => p.id === post.id);
+
+    if (index !== -1) {
+      return {
+        prevPost:
+          index > 0 ? toAdjacentRef(seriesPosts[index - 1]!) : null,
+        nextPost:
+          index < seriesPosts.length - 1
+            ? toAdjacentRef(seriesPosts[index + 1]!)
+            : null,
+      };
+    }
+  }
+
+  const index = sortedPosts.findIndex(p => p.id === post.id);
+
+  return {
+    prevPost: index > 0 ? toAdjacentRef(sortedPosts[index - 1]!) : null,
+    nextPost:
+      index < sortedPosts.length - 1
+        ? toAdjacentRef(sortedPosts[index + 1]!)
+        : null,
+  };
+}
