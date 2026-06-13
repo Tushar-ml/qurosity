@@ -1,0 +1,88 @@
+---
+type Props = {
+  caption?: string;
+};
+
+const {
+  caption = "Energy wasted per erased bit above the physics floor. Today’s chips sit far above Landauer's limit — but that gap is closing.",
+} = Astro.props;
+---
+
+<figure class="landauer-wall-figure not-prose my-8">
+  <svg
+    viewBox="0 0 560 300"
+    role="img"
+    aria-labelledby="landauer-wall-title landauer-wall-desc"
+    class="landauer-wall-figure__svg"
+  >
+    <title id="landauer-wall-title">Approaching Landauer's Wall</title>
+    <desc id="landauer-wall-desc">
+      A diagram showing today's CMOS chips using far more energy per bit than
+      Landauer's limit, with future chips getting closer to that thermodynamic
+      floor.
+    </desc>
+
+    <text x="280" y="28" text-anchor="middle" class="landauer-wall-figure__title">
+      Approaching Landauer's Wall
+    </text>
+
+    <text
+      x="24"
+      y="150"
+      text-anchor="middle"
+      transform="rotate(-90 24 150)"
+      class="landauer-wall-figure__axis-label"
+    >
+      Energy per erased bit (log scale)
+    </text>
+
+    <line x1="72" y1="52" x2="72" y2="248" class="landauer-wall-figure__axis" />
+    <line x1="72" y1="248" x2="520" y2="248" class="landauer-wall-figure__axis" />
+
+    <text x="296" y="272" text-anchor="middle" class="landauer-wall-figure__axis-label">
+      Chip generations →
+    </text>
+
+    <rect x="96" y="68" width="380" height="44" rx="4" class="landauer-wall-figure__bar landauer-wall-figure__bar--today" />
+    <text x="108" y="95" class="landauer-wall-figure__bar-label">Today's CMOS</text>
+    <text x="468" y="95" text-anchor="end" class="landauer-wall-figure__bar-note">~10³–10⁵× above the wall</text>
+
+    <rect x="96" y="124" width="260" height="36" rx="4" class="landauer-wall-figure__bar" />
+    <text x="108" y="147" class="landauer-wall-figure__bar-label">Future chips</text>
+    <text x="348" y="147" text-anchor="end" class="landauer-wall-figure__bar-note">margin shrinking</text>
+
+    <rect x="96" y="176" width="120" height="32" rx="4" class="landauer-wall-figure__bar landauer-wall-figure__bar--near" />
+    <text x="108" y="197" class="landauer-wall-figure__bar-label">Near the wall</text>
+
+    <line
+      x1="72"
+      y1="228"
+      x2="520"
+      y2="228"
+      class="landauer-wall-figure__wall"
+    />
+    <text x="96" y="222" class="landauer-wall-figure__wall-label">k_B T ln 2 — the wall (physics floor)</text>
+
+    <path
+      d="M 500 92 L 500 210"
+      class="landauer-wall-figure__arrow"
+      marker-end="url(#landauer-wall-arrowhead)"
+    />
+    <text x="512" y="156" class="landauer-wall-figure__arrow-label">getting closer</text>
+
+    <defs>
+      <marker
+        id="landauer-wall-arrowhead"
+        markerWidth="8"
+        markerHeight="8"
+        refX="6"
+        refY="4"
+        orient="auto"
+      >
+        <path d="M 0 0 L 8 4 L 0 8 Z" class="landauer-wall-figure__arrow-head" />
+      </marker>
+    </defs>
+  </svg>
+
+  {caption && <figcaption class="landauer-wall-figure__caption">{caption}</figcaption>}
+</figure>

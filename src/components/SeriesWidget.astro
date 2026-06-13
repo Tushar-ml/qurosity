@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getSeriesPosts } from "@/utils/getSeries";
+import { slugifyStr } from "@/utils/slugify";
+import { getPostUrl } from "@/utils/getPostPaths";
+import config from "@/config";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+  allPosts: CollectionEntry<"posts">[];
+};
+
+const { post, allPosts } = Astro.props;
+const { series } = post.data;
+
+if (!series) return;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const seriesSlug = slugifyStr(series);
+const parts = getSeriesPosts(allPosts, seriesSlug);
+---
+
+<aside class="series-widget not-prose my-8" aria-label={`Series: ${series}`}>
+  <div class="series-widget__header">
+    <span class="series-widget__label">Series</span>
+    <a
+      href={getRelativeLocaleUrl(locale, `series/${seriesSlug}`)}
+      class="series-widget__title"
+    >
+      {series}
+    </a>
+  </div>
+
+  <ol class="series-widget__list">
+    {
+      parts.map(part => {
+        const isCurrent = part.id === post.id;
+        return (
+          <li
+            class:list={[
+              "series-widget__item",
+              { "series-widget__item--current": isCurrent },
+            ]}
+          >
+            <span class="series-widget__part-num">
+              Part {part.data.seriesPart}
+            </span>
+            {isCurrent ? (
+              <span class="series-widget__part-title series-widget__part-title--current">
+                {part.data.title.replace(/^.*?:\s*/, "")}
+              </span>
+            ) : (
+              <a
+                href={getPostUrl(part.id, part.filePath, locale)}
+                class="series-widget__part-title series-widget__part-title--link"
+              >
+                {part.data.title.replace(/^.*?:\s*/, "")}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</aside>

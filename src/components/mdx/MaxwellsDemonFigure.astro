@@ -1,0 +1,79 @@
+---
+type Props = {
+  caption?: string;
+};
+
+const {
+  caption = "Maxwell's Demon watches molecules and opens the trap door only for fast ones — seemingly sorting heat for free. But recording and erasing what it sees is the hidden cost.",
+} = Astro.props;
+---
+
+<figure class="maxwell-figure not-prose my-8">
+  <svg
+    viewBox="0 0 560 240"
+    role="img"
+    aria-labelledby="maxwell-title maxwell-desc"
+    class="maxwell-figure__svg"
+  >
+    <title id="maxwell-title">Maxwell's Demon</title>
+    <desc id="maxwell-desc">
+      Two chambers separated by a wall with a trap door. A demon sits at the
+      door, letting fast (hot) molecules through to the right and keeping slow
+      (cold) molecules on the left, apparently violating the Second Law of
+      Thermodynamics without doing work.
+    </desc>
+
+    <!-- Left chamber -->
+    <rect x="40" y="40" width="200" height="160" rx="6" class="maxwell-figure__chamber" />
+    <text x="140" y="30" text-anchor="middle" class="maxwell-figure__chamber-label">Cold side</text>
+
+    <!-- Right chamber -->
+    <rect x="320" y="40" width="200" height="160" rx="6" class="maxwell-figure__chamber maxwell-figure__chamber--hot" />
+    <text x="420" y="30" text-anchor="middle" class="maxwell-figure__chamber-label">Hot side</text>
+
+    <!-- Dividing wall -->
+    <line x1="240" y1="40" x2="240" y2="124" class="maxwell-figure__wall" />
+    <line x1="240" y1="156" x2="240" y2="200" class="maxwell-figure__wall" />
+
+    <!-- Trap door (open gap) -->
+    <rect x="234" y="122" width="12" height="36" rx="2" class="maxwell-figure__door" />
+
+    <!-- Demon -->
+    <circle cx="280" cy="140" r="14" class="maxwell-figure__demon-head" />
+    <text x="280" y="145" text-anchor="middle" class="maxwell-figure__demon-emoji">👿</text>
+    <text x="280" y="172" text-anchor="middle" class="maxwell-figure__demon-label">Demon</text>
+
+    <!-- Slow molecules left (small, cold) -->
+    <circle cx="90"  cy="90"  r="7" class="maxwell-figure__molecule maxwell-figure__molecule--slow" />
+    <circle cx="160" cy="130" r="7" class="maxwell-figure__molecule maxwell-figure__molecule--slow" />
+    <circle cx="100" cy="170" r="7" class="maxwell-figure__molecule maxwell-figure__molecule--slow" />
+    <circle cx="185" cy="80"  r="7" class="maxwell-figure__molecule maxwell-figure__molecule--slow" />
+    <circle cx="70"  cy="155" r="7" class="maxwell-figure__molecule maxwell-figure__molecule--slow" />
+
+    <!-- Fast molecules right (larger, hot) -->
+    <circle cx="370" cy="85"  r="9" class="maxwell-figure__molecule maxwell-figure__molecule--fast" />
+    <circle cx="450" cy="120" r="9" class="maxwell-figure__molecule maxwell-figure__molecule--fast" />
+    <circle cx="390" cy="165" r="9" class="maxwell-figure__molecule maxwell-figure__molecule--fast" />
+    <circle cx="490" cy="80"  r="9" class="maxwell-figure__molecule maxwell-figure__molecule--fast" />
+    <circle cx="470" cy="175" r="9" class="maxwell-figure__molecule maxwell-figure__molecule--fast" />
+
+    <!-- Arrow showing a fast molecule coming through -->
+    <circle cx="255" cy="140" r="9" class="maxwell-figure__molecule maxwell-figure__molecule--crossing" />
+    <line x1="268" y1="140" x2="308" y2="140" class="maxwell-figure__crossing-arrow" marker-end="url(#maxwell-arrow)" />
+
+    <!-- Legend -->
+    <circle cx="52" cy="218" r="6" class="maxwell-figure__molecule maxwell-figure__molecule--slow" />
+    <text x="64" y="222" class="maxwell-figure__legend-label">slow (cold)</text>
+    <circle cx="160" cy="218" r="8" class="maxwell-figure__molecule maxwell-figure__molecule--fast" />
+    <text x="174" y="222" class="maxwell-figure__legend-label">fast (hot)</text>
+    <text x="300" y="222" class="maxwell-figure__legend-label maxwell-figure__legend-label--note">The demon's hidden cost: memory erasure</text>
+
+    <defs>
+      <marker id="maxwell-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M 0 0 L 7 3.5 L 0 7 Z" class="maxwell-figure__arrow-head" />
+      </marker>
+    </defs>
+  </svg>
+
+  {caption && <figcaption class="maxwell-figure__caption">{caption}</figcaption>}
+</figure>

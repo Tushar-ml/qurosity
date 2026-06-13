@@ -82,6 +82,31 @@
       @apply border-s-accent/80 wrap-break-word opacity-80;
     }
 
+    mark {
+      @apply rounded-sm bg-yellow-200/80 px-1 text-foreground box-decoration-clone;
+    }
+
+    /* KaTeX (remark-math) */
+    .katex-display {
+      @apply my-6 overflow-x-auto py-2;
+    }
+
+    .katex {
+      @apply text-foreground;
+    }
+
+    .inline-math .katex {
+      @apply text-[1em];
+    }
+
+    .display-math {
+      @apply my-6 block;
+    }
+
+    .display-math .katex-display {
+      @apply my-0;
+    }
+
     details:not(.callout) {
       @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0!;
     }
@@ -104,6 +129,10 @@
     @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
+  html[data-theme="dark"] .app-prose mark {
+    @apply bg-yellow-500/25;
+  }
+
   /* Styles for Shiki transformers */
   /* https://shiki.style/packages/transformers */
   .astro-code {
@@ -119,5 +148,405 @@
     .highlighted-word {
       @apply border-border rounded-sm border px-0.5 py-px;
     }
+  }
+
+  /* ===== Interactive equation components ===== */
+  .equation-card {
+    @apply border-border bg-muted/30 overflow-hidden rounded-lg border;
+  }
+
+  .equation-card__toolbar {
+    @apply border-border flex items-start justify-between gap-3 border-b px-4 py-2;
+  }
+
+  .equation-card__caption {
+    @apply text-muted-foreground m-0 text-sm leading-snug;
+  }
+
+  .equation-card__copy {
+    @apply text-muted-foreground hover:text-accent shrink-0 rounded px-2 py-1 text-xs font-medium transition-colors;
+  }
+
+  .equation-card__copy--success {
+    @apply text-accent;
+  }
+
+  .equation-card__math {
+    @apply flex min-h-12 items-center justify-center overflow-x-auto px-4 py-5 text-lg;
+  }
+
+  .equation-card__math .katex-display {
+    @apply my-0;
+  }
+
+  .equation-card__math .katex-error {
+    @apply text-foreground text-base;
+  }
+
+  .equation-card__math--inline {
+    @apply py-3 text-left text-base;
+  }
+
+  .equation-card__legend {
+    @apply border-border grid grid-cols-[auto_1fr] gap-x-3 gap-y-2 border-t px-4 py-3 text-sm;
+  }
+
+  .equation-card__symbol {
+    @apply bg-accent/10 text-accent w-fit rounded px-2 py-0.5 font-semibold;
+  }
+
+  .equation-card__meaning {
+    @apply text-muted-foreground m-0 leading-snug;
+  }
+
+  .equation-steps {
+    @apply flex flex-col gap-2;
+  }
+
+  .equation-step {
+    @apply border-border bg-muted/20 overflow-hidden rounded-lg border;
+  }
+
+  .equation-step__summary {
+    @apply hover:bg-muted/40 flex cursor-pointer list-none items-center gap-3 px-4 py-3 font-medium transition-colors;
+  }
+
+  .equation-step__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .equation-step__index {
+    @apply bg-accent text-accent-foreground flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold;
+  }
+
+  .equation-step__body {
+    @apply border-border border-t px-4 py-4;
+  }
+
+  .equation-step__math-wrap {
+    @apply bg-background border-border overflow-x-auto rounded-md border px-4 py-5;
+  }
+
+  .equation-step__math {
+    @apply flex min-h-12 items-center justify-center text-lg;
+  }
+
+  .equation-step__math .katex-display {
+    @apply my-0;
+  }
+
+  .equation-step__math .katex-error {
+    @apply text-foreground text-base;
+  }
+
+  .equation-step__legend {
+    @apply mt-3 rounded-md border;
+  }
+
+  .equation-step__note {
+    @apply text-muted-foreground mt-3 mb-0 text-sm leading-relaxed;
+  }
+
+  .landauer-wall-figure {
+    @apply border-border bg-muted/30 overflow-hidden rounded-lg border;
+  }
+
+  .landauer-wall-figure__svg {
+    @apply text-foreground mx-auto block w-full max-w-2xl px-4 pt-4;
+  }
+
+  .landauer-wall-figure__title {
+    @apply fill-foreground text-sm font-semibold;
+    font: 600 14px var(--font-app), system-ui, sans-serif;
+  }
+
+  .landauer-wall-figure__axis-label {
+    @apply fill-muted-foreground;
+    font: 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .landauer-wall-figure__axis {
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .landauer-wall-figure__bar {
+    fill: color-mix(in srgb, var(--muted) 70%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .landauer-wall-figure__bar--today {
+    fill: color-mix(in srgb, var(--accent) 18%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+
+  .landauer-wall-figure__bar--near {
+    fill: color-mix(in srgb, var(--accent) 28%, var(--muted));
+    stroke: var(--accent);
+  }
+
+  .landauer-wall-figure__bar-label {
+    @apply fill-foreground;
+    font: 500 12px var(--font-app), system-ui, sans-serif;
+  }
+
+  .landauer-wall-figure__bar-note {
+    @apply fill-muted-foreground;
+    font: 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .landauer-wall-figure__wall {
+    stroke: var(--accent);
+    stroke-dasharray: 6 4;
+    stroke-width: 2.5;
+  }
+
+  .landauer-wall-figure__wall-label {
+    @apply fill-accent;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .landauer-wall-figure__arrow {
+    fill: none;
+    stroke: var(--muted-foreground);
+    stroke-dasharray: 4 3;
+    stroke-width: 1.5;
+  }
+
+  .landauer-wall-figure__arrow-head {
+    fill: var(--muted-foreground);
+  }
+
+  .landauer-wall-figure__arrow-label {
+    @apply fill-muted-foreground;
+    font: 10px var(--font-app), system-ui, sans-serif;
+  }
+
+  .landauer-wall-figure__caption {
+    @apply text-muted-foreground border-border m-0 border-t px-4 py-3 text-center text-sm leading-snug;
+  }
+
+  /* ===== Series Widget ===== */
+  .series-widget {
+    @apply border-border bg-muted/30 rounded-lg border overflow-hidden;
+  }
+
+  .series-widget__header {
+    @apply border-border flex items-baseline gap-2 border-b px-4 py-3;
+  }
+
+  .series-widget__label {
+    @apply text-muted-foreground text-xs font-semibold uppercase tracking-widest shrink-0;
+  }
+
+  .series-widget__title {
+    @apply text-accent font-semibold hover:underline underline-offset-4 decoration-dashed text-sm leading-snug;
+  }
+
+  .series-widget__list {
+    @apply m-0 list-none divide-y divide-dashed p-0;
+    border-color: var(--color-border);
+  }
+
+  .series-widget__item {
+    @apply flex items-baseline gap-3 px-4 py-2.5;
+  }
+
+  .series-widget__item--current {
+    @apply bg-accent/8;
+  }
+
+  .series-widget__part-num {
+    @apply text-muted-foreground shrink-0 text-xs font-medium tabular-nums;
+  }
+
+  .series-widget__part-title {
+    @apply text-sm leading-snug;
+  }
+
+  .series-widget__part-title--current {
+    @apply text-foreground font-semibold;
+  }
+
+  .series-widget__part-title--link {
+    @apply text-foreground hover:text-accent decoration-dashed underline-offset-4 hover:underline;
+  }
+
+  /* ===== Bit Erasure Figure ===== */
+  .bit-erasure-figure {
+    @apply border-border bg-muted/30 overflow-hidden rounded-lg border;
+  }
+
+  .bit-erasure-figure__svg {
+    @apply mx-auto block w-full max-w-xl px-4 pt-4;
+  }
+
+  .bit-erasure-figure__section-label {
+    @apply fill-muted-foreground;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .bit-erasure-figure__state-box {
+    fill: color-mix(in srgb, var(--muted) 60%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .bit-erasure-figure__state-box--kept {
+    fill: color-mix(in srgb, var(--accent) 15%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 50%, var(--border));
+  }
+
+  .bit-erasure-figure__state-box--gone {
+    fill: color-mix(in srgb, var(--muted) 30%, var(--background));
+    stroke: var(--border);
+    opacity: 0.45;
+  }
+
+  .bit-erasure-figure__bit-label {
+    @apply fill-foreground;
+    font: 700 28px var(--font-app), system-ui, sans-serif;
+  }
+
+  .bit-erasure-figure__bit-gone {
+    @apply fill-muted-foreground;
+    font: 700 24px var(--font-app), system-ui, sans-serif;
+    opacity: 0.5;
+  }
+
+  .bit-erasure-figure__sub-label {
+    @apply fill-muted-foreground;
+    font: 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .bit-erasure-figure__arrow-line {
+    stroke: var(--muted-foreground);
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .bit-erasure-figure__arrow-label {
+    @apply fill-muted-foreground;
+    font: 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .bit-erasure-figure__arrow-head {
+    fill: var(--muted-foreground);
+  }
+
+  .bit-erasure-figure__heat-line {
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-dasharray: 4 3;
+    fill: none;
+  }
+
+  .bit-erasure-figure__heat-label {
+    @apply fill-accent;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .bit-erasure-figure__heat-head {
+    fill: var(--accent);
+  }
+
+  .bit-erasure-figure__caption {
+    @apply text-muted-foreground border-border m-0 border-t px-4 py-3 text-center text-sm leading-snug;
+  }
+
+  /* ===== Maxwell's Demon Figure ===== */
+  .maxwell-figure {
+    @apply border-border bg-muted/30 overflow-hidden rounded-lg border;
+  }
+
+  .maxwell-figure__svg {
+    @apply mx-auto block w-full max-w-2xl px-4 pt-4;
+  }
+
+  .maxwell-figure__chamber {
+    fill: color-mix(in srgb, var(--muted) 40%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .maxwell-figure__chamber--hot {
+    fill: color-mix(in srgb, var(--accent) 10%, var(--muted));
+  }
+
+  .maxwell-figure__chamber-label {
+    @apply fill-muted-foreground;
+    font: 600 12px var(--font-app), system-ui, sans-serif;
+  }
+
+  .maxwell-figure__wall {
+    stroke: var(--border);
+    stroke-width: 3;
+  }
+
+  .maxwell-figure__door {
+    fill: color-mix(in srgb, var(--accent) 20%, var(--muted));
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+
+  .maxwell-figure__demon-head {
+    fill: color-mix(in srgb, var(--muted) 60%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .maxwell-figure__demon-emoji {
+    font: 14px system-ui, sans-serif;
+  }
+
+  .maxwell-figure__demon-label {
+    @apply fill-muted-foreground;
+    font: 10px var(--font-app), system-ui, sans-serif;
+  }
+
+  .maxwell-figure__molecule {
+    stroke-width: 0;
+  }
+
+  .maxwell-figure__molecule--slow {
+    fill: color-mix(in srgb, var(--accent) 25%, var(--muted));
+  }
+
+  .maxwell-figure__molecule--fast {
+    fill: var(--accent);
+    opacity: 0.75;
+  }
+
+  .maxwell-figure__molecule--crossing {
+    fill: var(--accent);
+    opacity: 0.9;
+  }
+
+  .maxwell-figure__crossing-arrow {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .maxwell-figure__arrow-head {
+    fill: var(--accent);
+  }
+
+  .maxwell-figure__legend-label {
+    @apply fill-muted-foreground;
+    font: 11px var(--font-app), system-ui, sans-serif;
+    dominant-baseline: middle;
+  }
+
+  .maxwell-figure__legend-label--note {
+    @apply fill-accent;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .maxwell-figure__caption {
+    @apply text-muted-foreground border-border m-0 border-t px-4 py-3 text-center text-sm leading-snug;
   }
 }

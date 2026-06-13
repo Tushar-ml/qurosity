@@ -1,0 +1,111 @@
+---
+import katex from "katex";
+
+export type EquationVariable = {
+  symbol: string;
+  meaning: string;
+};
+
+type Props = {
+  expression: string;
+  caption?: string;
+  displayMode?: boolean;
+  variables?: EquationVariable[];
+};
+
+const {
+  expression,
+  caption,
+  displayMode = true,
+  variables = [],
+} = Astro.props;
+
+const html = katex.renderToString(expression, {
+  displayMode,
+  throwOnError: false,
+  trust: true,
+  strict: "ignore",
+});
+
+const equationId = `eq-${crypto.randomUUID().slice(0, 8)}`;
+---
+
+<figure
+  class="equation-card not-prose my-8"
+  data-equation-id={equationId}
+  data-latex={expression}
+>
+  <div class="equation-card__toolbar">
+    {
+      caption && (
+        <figcaption class="equation-card__caption">{caption}</figcaption>
+      )
+    }
+    <button
+      type="button"
+      class="equation-card__copy"
+      data-copy-latex
+      aria-label="Copy LaTeX source"
+      title="Copy LaTeX"
+    >
+      <span data-copy-label>Copy</span>
+    </button>
+  </div>
+
+  <div
+    class:list={[
+      "equation-card__math",
+      { "equation-card__math--inline": !displayMode },
+    ]}
+    set:html={html}
+  />
+
+  {
+    variables.length > 0 && (
+      <dl class="equation-card__legend">
+        {variables.map(({ symbol, meaning }) => (
+          <>
+            <dt class="equation-card__symbol" title={meaning}>
+              {symbol}
+            </dt>
+            <dd class="equation-card__meaning">{meaning}</dd>
+          </>
+        ))}
+      </dl>
+    )
+  }
+</figure>
+
+<script>
+  function initEquationCards() {
+    document.querySelectorAll<HTMLButtonElement>("[data-copy-latex]").forEach(button => {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+
+      const card = button.closest("[data-latex]");
+      const label = button.querySelector("[data-copy-label]");
+      const latex = card?.getAttribute("data-latex");
+      if (!latex || !label) return;
+
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(latex);
+          label.textContent = "Copied!";
+          button.classList.add("equation-card__copy--success");
+          window.setTimeout(() => {
+            label.textContent = "Copy";
+            button.classList.remove("equation-card__copy--success");
+          }, 1600);
+        } catch {
+          label.textContent = "Failed";
+          window.setTimeout(() => {
+            label.textContent = "Copy";
+          }, 1600);
+        }
+      });
+    });
+  }
+
+  initEquationCards();
+  document.addEventListener("astro:page-load", initEquationCards);
+</script>

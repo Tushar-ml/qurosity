@@ -1,0 +1,27 @@
+---
+import katex from "katex";
+
+type Props = {
+  expression: string;
+  display?: boolean;
+};
+
+const { expression, display = false } = Astro.props;
+
+const html = katex.renderToString(expression, {
+  displayMode: display,
+  throwOnError: false,
+  trust: true,
+  strict: "ignore",
+});
+---
+
+{
+  display ? (
+    <center class="display-math">
+      <span class="inline-math" set:html={html} />
+    </center>
+  ) : (
+    <span class="inline-math" set:html={html} />
+  )
+}

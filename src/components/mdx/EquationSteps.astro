@@ -1,0 +1,58 @@
+---
+import katex from "katex";
+import type { EquationVariable } from "./InteractiveEquation.astro";
+
+export type EquationStep = {
+  title: string;
+  expression: string;
+  note?: string;
+  variables?: EquationVariable[];
+};
+
+type Props = {
+  steps: EquationStep[];
+};
+
+const { steps } = Astro.props;
+
+const renderedSteps = steps.map(step => ({
+  ...step,
+  html: katex.renderToString(step.expression, {
+    displayMode: true,
+    throwOnError: false,
+    trust: true,
+    strict: "ignore",
+  }),
+}));
+---
+
+<div class="equation-steps not-prose my-8">
+  {
+    renderedSteps.map((step, index) => (
+      <details class="equation-step" open={index === 0 ? true : undefined}>
+        <summary class="equation-step__summary">
+          <span class="equation-step__index">{index + 1}</span>
+          <span>{step.title}</span>
+        </summary>
+        <div class="equation-step__body">
+          <div class="equation-step__math-wrap">
+            <div class="equation-step__math" set:html={step.html} />
+          </div>
+          {
+            step.variables && step.variables.length > 0 && (
+              <dl class="equation-card__legend equation-step__legend">
+                {step.variables.map(({ symbol, meaning }) => (
+                  <>
+                    <dt class="equation-card__symbol">{symbol}</dt>
+                    <dd class="equation-card__meaning">{meaning}</dd>
+                  </>
+                ))}
+              </dl>
+            )
+          }
+          {step.note && <p class="equation-step__note">{step.note}</p>}
+        </div>
+      </details>
+    ))
+  }
+</div>

@@ -14,6 +14,8 @@ import ShareLinks from "./_components/ShareLinks.astro";
 import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
 import AdjacentPostNav from "./_components/AdjacentPostNav.astro";
+import { mdxComponents } from "@/components/mdx";
+import SeriesWidget from "@/components/SeriesWidget.astro";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -24,6 +26,7 @@ export async function getStaticPaths() {
     params: { slug: getPostSlug(post.id, post.filePath) },
     props: {
       post,
+      allPosts: posts,
       prevPost:
         index > 0
           ? {
@@ -52,11 +55,12 @@ type AdjacentPost = {
 
 type Props = {
   post: CollectionEntry<"posts">;
+  allPosts: CollectionEntry<"posts">[];
   prevPost: AdjacentPost;
   nextPost: AdjacentPost;
 };
 
-const { post, prevPost, nextPost } = Astro.props;
+const { post, allPosts, prevPost, nextPost } = Astro.props;
 const locale = Astro.currentLocale ?? config.site.lang;
 
 const {
@@ -132,6 +136,10 @@ const ogImage = ogImageUrl
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
 
+    {post.data.series && (
+      <SeriesWidget {post} {allPosts} />
+    )}
+
     <article
       id="article"
       class:list={[
@@ -140,7 +148,7 @@ const ogImage = ogImageUrl
         "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
       ]}
     >
-      <Content />
+      <Content components={mdxComponents} />
     </article>
 
     <hr class="my-8 border-dashed" />

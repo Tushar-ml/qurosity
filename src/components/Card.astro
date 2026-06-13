@@ -1,8 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
+import { slugifyStr } from "@/utils/slugify";
 import Datetime from "./Datetime.astro";
+import config from "@/config";
 
 type Props = {
   variant?: "h2" | "h3";
@@ -10,7 +13,8 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, series, seriesPart, ...props } = data;
+const locale = Astro.currentLocale ?? config.site.lang;
 ---
 
 <li class="my-6">
@@ -26,6 +30,19 @@ const { title, description, ...props } = data;
       {title}
     </Heading>
   </a>
-  <Datetime {...props} />
+  <div class="mt-1.5 mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+    <Datetime {...props} />
+    {
+      series && (
+        <a
+          href={getRelativeLocaleUrl(locale, `series/${slugifyStr(series)}`)}
+          class="text-muted-foreground hover:text-accent border-border flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors"
+        >
+          <span class="opacity-60">§</span>
+          {series}{seriesPart ? ` · Part ${seriesPart}` : ""}
+        </a>
+      )
+    }
+  </div>
   <p>{description}</p>
 </li>

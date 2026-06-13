@@ -1,0 +1,69 @@
+---
+type Props = {
+  caption?: string;
+};
+
+const {
+  caption = "Erasing a bit collapses two possible states into one. The lost possibility becomes heat.",
+} = Astro.props;
+---
+
+<figure class="bit-erasure-figure not-prose my-8">
+  <svg
+    viewBox="0 0 560 200"
+    role="img"
+    aria-labelledby="bit-erasure-title bit-erasure-desc"
+    class="bit-erasure-figure__svg"
+  >
+    <title id="bit-erasure-title">How Erasing a Bit Produces Heat</title>
+    <desc id="bit-erasure-desc">
+      Before erasure a bit can be 0 or 1 — two states. After erasure only 0
+      remains — one state. The collapsed state exits as heat.
+    </desc>
+
+    <!-- BEFORE label -->
+    <text x="130" y="28" text-anchor="middle" class="bit-erasure-figure__section-label">BEFORE</text>
+
+    <!-- Box 0 -->
+    <rect x="44" y="44" width="76" height="76" rx="8" class="bit-erasure-figure__state-box" />
+    <text x="82" y="92" text-anchor="middle" class="bit-erasure-figure__bit-label">0</text>
+
+    <!-- Box 1 -->
+    <rect x="144" y="44" width="76" height="76" rx="8" class="bit-erasure-figure__state-box" />
+    <text x="182" y="92" text-anchor="middle" class="bit-erasure-figure__bit-label">1</text>
+
+    <text x="130" y="148" text-anchor="middle" class="bit-erasure-figure__sub-label">2 possible states</text>
+
+    <!-- Arrow -->
+    <line x1="248" y1="82" x2="298" y2="82" class="bit-erasure-figure__arrow-line" marker-end="url(#bit-erasure-arrow)" />
+    <text x="273" y="72" text-anchor="middle" class="bit-erasure-figure__arrow-label">erase</text>
+
+    <!-- AFTER label -->
+    <text x="390" y="28" text-anchor="middle" class="bit-erasure-figure__section-label">AFTER</text>
+
+    <!-- Box 0 kept -->
+    <rect x="344" y="44" width="76" height="76" rx="8" class="bit-erasure-figure__state-box bit-erasure-figure__state-box--kept" />
+    <text x="382" y="92" text-anchor="middle" class="bit-erasure-figure__bit-label">0</text>
+
+    <!-- Box 1 gone (faded X) -->
+    <rect x="444" y="44" width="76" height="76" rx="8" class="bit-erasure-figure__state-box bit-erasure-figure__state-box--gone" />
+    <text x="482" y="92" text-anchor="middle" class="bit-erasure-figure__bit-gone">✕</text>
+
+    <text x="390" y="148" text-anchor="middle" class="bit-erasure-figure__sub-label">1 state remains</text>
+
+    <!-- Heat arrow down from the gone box -->
+    <line x1="482" y1="124" x2="482" y2="168" class="bit-erasure-figure__heat-line" marker-end="url(#bit-erasure-heat-arrow)" />
+    <text x="494" y="154" class="bit-erasure-figure__heat-label">heat</text>
+
+    <defs>
+      <marker id="bit-erasure-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 Z" class="bit-erasure-figure__arrow-head" />
+      </marker>
+      <marker id="bit-erasure-heat-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 Z" class="bit-erasure-figure__heat-head" />
+      </marker>
+    </defs>
+  </svg>
+
+  {caption && <figcaption class="bit-erasure-figure__caption">{caption}</figcaption>}
+</figure>

@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { getUniqueSeries } from "@/utils/getSeries";
+import config from "@/config";
+
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const seriesList = getUniqueSeries(posts);
+
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+<Layout title={`Series | ${config.site.title}`}>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="Series" pageDesc="Multi-part series of posts.">
+    {
+      seriesList.length === 0 ? (
+        <p class="text-muted-foreground">No series yet.</p>
+      ) : (
+        <ul class="flex flex-col gap-4">
+          {seriesList.map(({ slug, name, count }) => (
+            <li>
+              <a
+                href={getRelativeLocaleUrl(locale, `series/${slug}`)}
+                class="text-accent hover:underline underline-offset-4 decoration-dashed font-medium text-lg"
+              >
+                {name}
+              </a>
+              <span class="text-muted-foreground ml-2 text-sm">
+                {count} {count === 1 ? "part" : "parts"}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>
