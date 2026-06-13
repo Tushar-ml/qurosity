@@ -2,10 +2,10 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://example.com/",
+    url: "https://qurosity.vercel.app/",
     title: "Qurosity",
     description: "A journal driven by curiosity.",
-    author: "Your Name",
+    author: "Tushar Goel",
     profile: "",
     ogImage: "favicon.svg",
     lang: "en",
