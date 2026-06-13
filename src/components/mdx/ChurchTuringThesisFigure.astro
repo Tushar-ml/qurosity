@@ -1,0 +1,77 @@
+---
+type Props = {
+  caption?: string;
+};
+
+const {
+  caption = "The mathematical Church–Turing thesis asks what is calculable. Deutsch's physical version asks what is simulable — and only the physical side carries thermodynamic cost.",
+} = Astro.props;
+---
+
+<figure class="ct-thesis-figure not-prose my-8">
+  <svg
+    viewBox="0 0 560 280"
+    role="img"
+    aria-labelledby="ct-thesis-title ct-thesis-desc"
+    class="ct-thesis-figure__svg"
+  >
+    <title id="ct-thesis-title">Mathematical vs Physical Church–Turing Thesis</title>
+    <desc id="ct-thesis-desc">
+      Side-by-side comparison of the mathematical Church–Turing thesis (effective
+      procedures on a Turing machine, no thermodynamics) and Deutsch's physical
+      Church–Turing principle (physical processes simulated by a universal quantum
+      computer, with substrate and thermodynamic cost).
+    </desc>
+
+    <!-- Mathematical column -->
+    <rect x="24" y="24" width="240" height="220" rx="8" class="ct-thesis-figure__panel" />
+    <text x="144" y="52" text-anchor="middle" class="ct-thesis-figure__panel-title">Mathematical CT</text>
+    <text x="144" y="72" text-anchor="middle" class="ct-thesis-figure__panel-subtitle">Church &amp; Turing (1936)</text>
+
+    <rect x="44" y="88" width="200" height="36" rx="4" class="ct-thesis-figure__row" />
+    <text x="144" y="110" text-anchor="middle" class="ct-thesis-figure__row-label">Effective procedures</text>
+
+    <rect x="44" y="132" width="200" height="36" rx="4" class="ct-thesis-figure__row" />
+    <text x="144" y="154" text-anchor="middle" class="ct-thesis-figure__row-label">Turing machine</text>
+
+    <rect x="44" y="176" width="200" height="36" rx="4" class="ct-thesis-figure__row ct-thesis-figure__row--question" />
+    <text x="144" y="198" text-anchor="middle" class="ct-thesis-figure__row-label">"What is calculable?"</text>
+
+    <text x="144" y="228" text-anchor="middle" class="ct-thesis-figure__footnote">No thermodynamics</text>
+
+    <!-- Physical column -->
+    <rect x="296" y="24" width="240" height="220" rx="8" class="ct-thesis-figure__panel ct-thesis-figure__panel--physical" />
+    <text x="416" y="52" text-anchor="middle" class="ct-thesis-figure__panel-title">Physical CT</text>
+    <text x="416" y="72" text-anchor="middle" class="ct-thesis-figure__panel-subtitle">Deutsch (1985)</text>
+
+    <rect x="316" y="88" width="200" height="36" rx="4" class="ct-thesis-figure__row ct-thesis-figure__row--physical" />
+    <text x="416" y="110" text-anchor="middle" class="ct-thesis-figure__row-label">Physical processes</text>
+
+    <rect x="316" y="132" width="200" height="36" rx="4" class="ct-thesis-figure__row ct-thesis-figure__row--physical" />
+    <text x="416" y="154" text-anchor="middle" class="ct-thesis-figure__row-label">Universal quantum computer</text>
+
+    <rect x="316" y="176" width="200" height="36" rx="4" class="ct-thesis-figure__row ct-thesis-figure__row--question ct-thesis-figure__row--physical" />
+    <text x="416" y="198" text-anchor="middle" class="ct-thesis-figure__row-label">"What is simulable?"</text>
+
+    <text x="416" y="228" text-anchor="middle" class="ct-thesis-figure__footnote ct-thesis-figure__footnote--physical">Substrate + cost</text>
+
+    <!-- Inclusion arrow -->
+    <path d="M 268 130 Q 282 130 282 148 Q 282 166 296 166" class="ct-thesis-figure__inclusion-arrow" marker-end="url(#ct-thesis-inclusion-arrow)" fill="none" />
+    <text x="282" y="142" text-anchor="middle" class="ct-thesis-figure__inclusion-label">⊂</text>
+
+    <!-- Landauer bridge -->
+    <line x1="416" y1="244" x2="416" y2="262" class="ct-thesis-figure__landauer-line" marker-end="url(#ct-thesis-landauer-arrow)" />
+    <text x="416" y="276" text-anchor="middle" class="ct-thesis-figure__landauer-label">Landauer's tax applies here</text>
+
+    <defs>
+      <marker id="ct-thesis-inclusion-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M 0 0 L 7 3.5 L 0 7 Z" class="ct-thesis-figure__arrow-head" />
+      </marker>
+      <marker id="ct-thesis-landauer-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M 0 0 L 7 3.5 L 0 7 Z" class="ct-thesis-figure__landauer-head" />
+      </marker>
+    </defs>
+  </svg>
+
+  {caption && <figcaption class="ct-thesis-figure__caption">{caption}</figcaption>}
+</figure>

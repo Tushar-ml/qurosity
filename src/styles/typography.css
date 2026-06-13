@@ -549,4 +549,196 @@
   .maxwell-figure__caption {
     @apply text-muted-foreground border-border m-0 border-t px-4 py-3 text-center text-sm leading-snug;
   }
+
+  /* ===== Church–Turing Thesis Figure ===== */
+  .ct-thesis-figure {
+    @apply border-border bg-muted/30 overflow-hidden rounded-lg border;
+  }
+
+  .ct-thesis-figure__svg {
+    @apply mx-auto block w-full max-w-2xl px-4 pt-4;
+  }
+
+  .ct-thesis-figure__panel {
+    fill: color-mix(in srgb, var(--muted) 40%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .ct-thesis-figure__panel--physical {
+    fill: color-mix(in srgb, var(--accent) 8%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+
+  .ct-thesis-figure__panel-title {
+    @apply fill-foreground;
+    font: 700 13px var(--font-app), system-ui, sans-serif;
+  }
+
+  .ct-thesis-figure__panel-subtitle {
+    @apply fill-muted-foreground;
+    font: 10px var(--font-app), system-ui, sans-serif;
+  }
+
+  .ct-thesis-figure__row {
+    fill: color-mix(in srgb, var(--muted) 60%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .ct-thesis-figure__row--physical {
+    fill: color-mix(in srgb, var(--accent) 12%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 30%, var(--border));
+  }
+
+  .ct-thesis-figure__row--question {
+    stroke-width: 1.5;
+  }
+
+  .ct-thesis-figure__row-label {
+    @apply fill-foreground;
+    font: 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .ct-thesis-figure__footnote {
+    @apply fill-muted-foreground;
+    font: 10px var(--font-app), system-ui, sans-serif;
+    font-style: italic;
+  }
+
+  .ct-thesis-figure__footnote--physical {
+    @apply fill-accent;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .ct-thesis-figure__inclusion-arrow {
+    stroke: var(--muted-foreground);
+    stroke-width: 1.5;
+  }
+
+  .ct-thesis-figure__inclusion-label {
+    @apply fill-muted-foreground;
+    font: 14px var(--font-app), system-ui, sans-serif;
+  }
+
+  .ct-thesis-figure__arrow-head {
+    fill: var(--muted-foreground);
+  }
+
+  .ct-thesis-figure__landauer-line {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+  }
+
+  .ct-thesis-figure__landauer-head {
+    fill: var(--accent);
+  }
+
+  .ct-thesis-figure__landauer-label {
+    @apply fill-accent;
+    font: 600 10px var(--font-app), system-ui, sans-serif;
+  }
+
+  .ct-thesis-figure__caption {
+    @apply text-muted-foreground border-border m-0 border-t px-4 py-3 text-center text-sm leading-snug;
+  }
+
+  /* ===== Physical Simulation Figure ===== */
+  .phys-sim-figure {
+    @apply border-border bg-muted/30 overflow-hidden rounded-lg border;
+  }
+
+  .phys-sim-figure__svg {
+    @apply mx-auto block w-full max-w-2xl px-4 pt-4;
+  }
+
+  .phys-sim-figure__stage-label {
+    @apply fill-muted-foreground;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .phys-sim-figure__box {
+    fill: color-mix(in srgb, var(--muted) 50%, var(--background));
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .phys-sim-figure__box--uqc {
+    fill: color-mix(in srgb, var(--accent) 10%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+
+  .phys-sim-figure__box--output {
+    fill: color-mix(in srgb, var(--accent) 15%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 50%, var(--border));
+  }
+
+  .phys-sim-figure__particle {
+    fill: var(--accent);
+    opacity: 0.7;
+  }
+
+  .phys-sim-figure__particle--alt {
+    opacity: 0.45;
+  }
+
+  .phys-sim-figure__bond {
+    stroke: var(--muted-foreground);
+    stroke-width: 1.5;
+    opacity: 0.5;
+  }
+
+  .phys-sim-figure__qubit-bar {
+    fill: color-mix(in srgb, var(--accent) 30%, var(--muted));
+    stroke: color-mix(in srgb, var(--accent) 50%, var(--border));
+    stroke-width: 1;
+  }
+
+  .phys-sim-figure__qubit-bar--alt {
+    fill: color-mix(in srgb, var(--accent) 50%, var(--muted));
+  }
+
+  .phys-sim-figure__output-panel {
+    fill: color-mix(in srgb, var(--accent) 20%, var(--background));
+    stroke: color-mix(in srgb, var(--accent) 40%, var(--border));
+    stroke-width: 1;
+  }
+
+  .phys-sim-figure__output-text {
+    @apply fill-foreground;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .phys-sim-figure__example {
+    @apply fill-muted-foreground;
+    font: 10px var(--font-app), system-ui, sans-serif;
+  }
+
+  .phys-sim-figure__arrow-line {
+    stroke: var(--muted-foreground);
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .phys-sim-figure__arrow-label {
+    @apply fill-muted-foreground;
+    font: 10px var(--font-app), system-ui, sans-serif;
+  }
+
+  .phys-sim-figure__arrow-head {
+    fill: var(--muted-foreground);
+  }
+
+  .phys-sim-figure__note {
+    @apply fill-accent;
+    font: 600 11px var(--font-app), system-ui, sans-serif;
+  }
+
+  .phys-sim-figure__caption {
+    @apply text-muted-foreground border-border m-0 border-t px-4 py-3 text-center text-sm leading-snug;
+  }
 }

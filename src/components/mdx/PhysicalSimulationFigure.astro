@@ -1,0 +1,69 @@
+---
+type Props = {
+  caption?: string;
+};
+
+const {
+  caption = "Deutsch's move: simulation is not metaphor — it is the claim that physical evolution and computation share the same boundary.",
+} = Astro.props;
+---
+
+<figure class="phys-sim-figure not-prose my-8">
+  <svg
+    viewBox="0 0 560 220"
+    role="img"
+    aria-labelledby="phys-sim-title phys-sim-desc"
+    class="phys-sim-figure__svg"
+  >
+    <title id="phys-sim-title">Physical Simulation Pipeline</title>
+    <desc id="phys-sim-desc">
+      A physical system such as a molecule, GPU die, or neuron is simulated by a
+      universal quantum computer using finite qubits and unitary evolution, producing
+      predictions or output through measurement as readout.
+    </desc>
+
+    <!-- Stage 1: Physical system -->
+    <text x="90" y="28" text-anchor="middle" class="phys-sim-figure__stage-label">Physical system</text>
+    <rect x="24" y="40" width="132" height="100" rx="8" class="phys-sim-figure__box" />
+    <circle cx="60" cy="78" r="10" class="phys-sim-figure__particle" />
+    <circle cx="90" cy="68" r="8" class="phys-sim-figure__particle phys-sim-figure__particle--alt" />
+    <circle cx="110" cy="95" r="9" class="phys-sim-figure__particle" />
+    <line x1="70" y1="100" x2="120" y2="115" class="phys-sim-figure__bond" />
+    <text x="90" y="148" text-anchor="middle" class="phys-sim-figure__example">molecule · GPU · neuron</text>
+
+    <!-- Arrow 1 -->
+    <line x1="162" y1="90" x2="208" y2="90" class="phys-sim-figure__arrow-line" marker-end="url(#phys-sim-arrow)" />
+    <text x="185" y="80" text-anchor="middle" class="phys-sim-figure__arrow-label">simulate</text>
+
+    <!-- Stage 2: UQC -->
+    <text x="280" y="28" text-anchor="middle" class="phys-sim-figure__stage-label">Universal quantum computer</text>
+    <rect x="214" y="40" width="132" height="100" rx="8" class="phys-sim-figure__box phys-sim-figure__box--uqc" />
+    <rect x="234" y="62" width="92" height="14" rx="3" class="phys-sim-figure__qubit-bar" />
+    <rect x="234" y="82" width="92" height="14" rx="3" class="phys-sim-figure__qubit-bar phys-sim-figure__qubit-bar--alt" />
+    <rect x="234" y="102" width="92" height="14" rx="3" class="phys-sim-figure__qubit-bar" />
+    <text x="280" y="148" text-anchor="middle" class="phys-sim-figure__example">finite qubits · unitary evolution</text>
+
+    <!-- Arrow 2 -->
+    <line x1="352" y1="90" x2="398" y2="90" class="phys-sim-figure__arrow-line" marker-end="url(#phys-sim-arrow)" />
+    <text x="375" y="80" text-anchor="middle" class="phys-sim-figure__arrow-label">measure</text>
+
+    <!-- Stage 3: Output -->
+    <text x="470" y="28" text-anchor="middle" class="phys-sim-figure__stage-label">Output</text>
+    <rect x="404" y="40" width="132" height="100" rx="8" class="phys-sim-figure__box phys-sim-figure__box--output" />
+    <rect x="424" y="68" width="92" height="44" rx="4" class="phys-sim-figure__output-panel" />
+    <text x="470" y="88" text-anchor="middle" class="phys-sim-figure__output-text">predictions</text>
+    <text x="470" y="104" text-anchor="middle" class="phys-sim-figure__output-text">readout</text>
+    <text x="470" y="148" text-anchor="middle" class="phys-sim-figure__example">measurement = readout</text>
+
+    <!-- Bottom note -->
+    <text x="280" y="188" text-anchor="middle" class="phys-sim-figure__note">Physical evolution and computation share the same boundary</text>
+
+    <defs>
+      <marker id="phys-sim-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <path d="M 0 0 L 8 4 L 0 8 Z" class="phys-sim-figure__arrow-head" />
+      </marker>
+    </defs>
+  </svg>
+
+  {caption && <figcaption class="phys-sim-figure__caption">{caption}</figcaption>}
+</figure>

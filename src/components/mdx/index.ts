@@ -4,6 +4,8 @@ import InteractiveEquation from "./InteractiveEquation.astro";
 import LandauerWallFigure from "./LandauerWallFigure.astro";
 import BitErasureFigure from "./BitErasureFigure.astro";
 import MaxwellsDemonFigure from "./MaxwellsDemonFigure.astro";
+import ChurchTuringThesisFigure from "./ChurchTuringThesisFigure.astro";
+import PhysicalSimulationFigure from "./PhysicalSimulationFigure.astro";
 
 export const mdxComponents = {
   EquationSteps,
@@ -12,4 +14,6 @@ export const mdxComponents = {
   LandauerWallFigure,
   BitErasureFigure,
   MaxwellsDemonFigure,
+  ChurchTuringThesisFigure,
+  PhysicalSimulationFigure,
 };
